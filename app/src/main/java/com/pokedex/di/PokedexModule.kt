@@ -4,7 +4,9 @@ import com.pokedex.data.datasource.remote.impl.PokedexRemoteDataSourceImpl
 import com.pokedex.data.repository.PokedexRepositoryImpl
 import com.pokedex.domain.repository.PokedexRepository
 import com.pokedex.domain.usecase.GetPokedexUseCase
+import com.pokedex.ui.viewmodel.pokedex.PokedexViewModel
 import org.koin.core.module.dsl.factoryOf
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
 val pokedexModule = module {
@@ -16,4 +18,6 @@ val pokedexModule = module {
     }
 
     factoryOf(::GetPokedexUseCase)
+
+    viewModelOf(::PokedexViewModel)
 }
