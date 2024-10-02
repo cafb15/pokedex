@@ -62,26 +62,25 @@ class PokedexViewModel(
     }
 
     fun getNexPagePokedex() {
-        Log.d("PokedexViewModel", "getFirstPagePokedex: page: $currentPage")
-
         viewModelScope.launch {
-            _isPaginating.update { true }
+            if (!isLastPage) {
+                Log.d("PokedexViewModel", "getNextPagePokedex: page: $currentPage")
+                _isPaginating.update { true }
 
-            getPokedex(currentPage)
+                getPokedex(currentPage)
 
-            _isPaginating.update { false }
+                _isPaginating.update { false }
+            }
         }
     }
 
     private suspend fun getPokedex(page: Int) {
-        if (!isLastPage) {
-            val result = getPokedexUseCase(page)
+        val result = getPokedexUseCase(page)
 
-            result.onSuccess { pokedex ->
-                currentPage++
-                isLastPage = pokedex.isLastPage
-                _pokemons.update { it + pokedex.pokemons }
-            }
+        result.onSuccess { pokedex ->
+            currentPage++
+            isLastPage = pokedex.isLastPage
+            _pokemons.update { it + pokedex.pokemons }
         }
     }
 }

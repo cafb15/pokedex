@@ -14,10 +14,11 @@ import com.pokedex.domain.model.Pokemon
 
 @Composable
 fun PokedexItem(
+    modifier: Modifier = Modifier,
     pokemon: Pokemon
 ) {
     Column(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
