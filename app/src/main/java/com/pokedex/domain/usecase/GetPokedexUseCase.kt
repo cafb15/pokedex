@@ -12,6 +12,6 @@ class GetPokedexUseCase(
     }
 
     suspend operator fun invoke(page: Int): Result<Pokedex> {
-        return repository.getPokedex(limit = LIMIT, offset = page * LIMIT).map { it.toDomain() }
+        return repository.getPokedex(limit = LIMIT, offset = page * LIMIT)
     }
 }

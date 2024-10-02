@@ -1,6 +1,5 @@
 package com.pokedex.ui.viewmodel.pokedex
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pokedex.domain.model.Pokemon
@@ -22,12 +21,14 @@ class PokedexViewModel(
 
     private var _isLoading = MutableStateFlow(false)
     private var _isPaginating = MutableStateFlow(false)
+    private var _pokemonNameFilter = MutableStateFlow("")
     private var _pokemons = MutableStateFlow<List<Pokemon>>(emptyList())
 
     val pokedexViewState: StateFlow<PokedexViewState> = combine(
         _isLoading,
         _isPaginating,
         _pokemons,
+        _pokemonNameFilter,
         ::calculateViewState
     ).stateIn(
         scope = viewModelScope,
@@ -38,20 +39,21 @@ class PokedexViewModel(
     private fun calculateViewState(
         isLoading: Boolean,
         isPaginating: Boolean,
-        pokemons: List<Pokemon>
+        pokemons: List<Pokemon>,
+        pokemonNameFilter: String
     ): PokedexViewState {
         return if (isLoading) {
             PokedexViewState.Loading
         } else {
             PokedexViewState.Success(
                 isPaginating = isPaginating,
-                pokemons = pokemons
+                pokemons = pokemons.filter { it.name.contains(pokemonNameFilter, ignoreCase = true) || pokemonNameFilter.isEmpty() },
+                pokemonNameFilter = pokemonNameFilter
             )
         }
     }
 
     fun getFirstPagePokedex() {
-        Log.d("PokedexViewModel", "getFirstPagePokedex")
         viewModelScope.launch {
             _isLoading.update { true }
 
@@ -64,7 +66,6 @@ class PokedexViewModel(
     fun getNexPagePokedex() {
         viewModelScope.launch {
             if (!isLastPage) {
-                Log.d("PokedexViewModel", "getNextPagePokedex: page: $currentPage")
                 _isPaginating.update { true }
 
                 getPokedex(currentPage)
@@ -82,5 +83,9 @@ class PokedexViewModel(
             isLastPage = pokedex.isLastPage
             _pokemons.update { it + pokedex.pokemons }
         }
+    }
+
+    fun filterPokemons(pokemonName: String) {
+        _pokemonNameFilter.update { pokemonName }
     }
 }

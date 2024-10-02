@@ -1,4 +1,4 @@
-package com.pokedex.ui.extensions
+package com.pokedex.core.ui.extensions
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

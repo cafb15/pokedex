@@ -1,6 +1,7 @@
 package com.pokedex
 
 import android.app.Application
+import com.pokedex.di.databaseModule
 import com.pokedex.di.networkModule
 import com.pokedex.di.pokedexModule
 import org.koin.android.ext.koin.androidContext
@@ -14,7 +15,7 @@ class PokedexApplication : Application() {
         onKoinStartup {
             androidLogger()
             androidContext(this@PokedexApplication)
-            modules(networkModule, pokedexModule)
+            modules(databaseModule, networkModule, pokedexModule)
         }
     }
 }

@@ -8,6 +8,7 @@ sealed interface PokedexViewState {
 
     data class Success(
         val isPaginating: Boolean,
-        val pokemons: List<Pokemon>
+        val pokemons: List<Pokemon>,
+        val pokemonNameFilter: String
     ) : PokedexViewState
 }

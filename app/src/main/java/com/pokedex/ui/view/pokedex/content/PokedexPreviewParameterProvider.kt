@@ -33,7 +33,8 @@ class PokedexPreviewParameterProvider : PreviewParameterProvider<PokedexViewStat
         PokedexViewState.Loading,
         PokedexViewState.Success(
             isPaginating = false,
-            pokemons = pokemons
+            pokemons = pokemons,
+            pokemonNameFilter = ""
         )
     )
 }

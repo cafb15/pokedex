@@ -2,12 +2,15 @@ package com.pokedex.ui.view.pokedex.content
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
@@ -19,12 +22,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pokedex.domain.model.Pokemon
-import com.pokedex.ui.extensions.applyIf
+import com.pokedex.core.ui.extensions.applyIf
 
 @Composable
 fun PokedexNonEmptyList(
     isPaginating: Boolean,
     pokemons: List<Pokemon>,
+    pokemonNameFilter: String,
+    onValueChange: (String) -> Unit,
     onNextPage: () -> Unit
 ) {
     val lazyState = rememberLazyListState()
@@ -32,28 +37,44 @@ fun PokedexNonEmptyList(
         derivedStateOf { lazyState.isScrollInProgress && !lazyState.canScrollForward }
     }
 
-    Box(modifier = Modifier.fillMaxSize()) {
-        LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-            state = lazyState
+    Scaffold(
+        topBar = {
+            OutlinedTextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 16.dp),
+                value = pokemonNameFilter,
+                onValueChange = onValueChange
+            )
+        }
+    ) { paddingValues ->
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
         ) {
-            items(pokemons) { pokemon ->
-                PokedexItem(
-                    modifier = Modifier.applyIf(pokemons.last().name == pokemon.name) {
-                        padding(bottom = 32.dp)
-                    },
-                    pokemon = pokemon
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+                state = lazyState
+            ) {
+                items(pokemons) { pokemon ->
+                    PokedexItem(
+                        modifier = Modifier.applyIf(pokemons.last().name == pokemon.name) {
+                            padding(bottom = 32.dp)
+                        },
+                        pokemon = pokemon
+                    )
+                }
+            }
+
+            if (isPaginating) {
+                CircularProgressIndicator(
+                    modifier = Modifier
+                        .size(32.dp)
+                        .align(Alignment.BottomCenter),
+                    color = Color.Blue
                 )
             }
-        }
-
-        if (isPaginating) {
-            CircularProgressIndicator(
-                modifier = Modifier
-                    .size(32.dp)
-                    .align(Alignment.BottomCenter),
-                color = Color.Blue
-            )
         }
     }
 
@@ -68,6 +89,8 @@ private fun PokedexNonEmptyListPreview() {
     PokedexNonEmptyList(
         isPaginating = true,
         pokemons = PokedexPreviewParameterProvider.pokemons,
+        pokemonNameFilter = "",
+        onValueChange = {},
         onNextPage = {}
     )
 }

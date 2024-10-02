@@ -8,6 +8,7 @@ import com.pokedex.ui.viewmodel.pokedex.PokedexViewState
 @Composable
 fun PokedexContent(
     viewState: PokedexViewState,
+    onValueChange: (String) -> Unit,
     onNextPage: () -> Unit
 ) {
     when (viewState) {
@@ -15,6 +16,8 @@ fun PokedexContent(
         is PokedexViewState.Success -> PokedexNonEmptyList(
             isPaginating = viewState.isPaginating,
             pokemons = viewState.pokemons,
+            pokemonNameFilter = viewState.pokemonNameFilter,
+            onValueChange = onValueChange,
             onNextPage = onNextPage
         )
     }
@@ -27,6 +30,7 @@ private fun PokedexContentPreview(
 ) {
     PokedexContent(
         viewState = viewState,
+        onValueChange = {},
         onNextPage = {}
     )
 }

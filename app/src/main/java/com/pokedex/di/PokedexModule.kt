@@ -1,5 +1,7 @@
 package com.pokedex.di
 
+import com.pokedex.data.datasource.local.PokedexLocalDataSource
+import com.pokedex.data.datasource.local.impl.PokedexLocalDataSourceImpl
 import com.pokedex.data.datasource.remote.PokedexRemoteDataSource
 import com.pokedex.data.datasource.remote.impl.PokedexRemoteDataSourceImpl
 import com.pokedex.data.repository.PokedexRepositoryImpl
@@ -11,9 +13,16 @@ import org.koin.dsl.module
 
 val pokedexModule = module {
 
+    factory<PokedexLocalDataSource> { PokedexLocalDataSourceImpl(pokedexDatabase = get()) }
+
     factory<PokedexRemoteDataSource> { PokedexRemoteDataSourceImpl(api = get()) }
 
-    factory<PokedexRepository> { PokedexRepositoryImpl(remoteDataSource = get()) }
+    factory<PokedexRepository> {
+        PokedexRepositoryImpl(
+            remoteDataSource = get(),
+            localDataSource = get()
+        )
+    }
 
     factory { GetPokedexUseCase(repository = get()) }
 

@@ -16,6 +16,7 @@ fun PokedexScreen() {
 
     PokedexContent(
         viewState = viewState,
+        onValueChange = viewModel::filterPokemons,
         onNextPage = viewModel::getNexPagePokedex
     )
 

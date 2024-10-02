@@ -12,7 +12,7 @@ import androidx.navigation.compose.rememberNavController
 import com.pokedex.ui.navigation.LocalNavController
 import com.pokedex.ui.navigation.PokedexRoute
 import com.pokedex.ui.navigation.pokedexDestination
-import com.pokedex.ui.theme.PokedexTheme
+import com.pokedex.core.ui.theme.PokedexTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
