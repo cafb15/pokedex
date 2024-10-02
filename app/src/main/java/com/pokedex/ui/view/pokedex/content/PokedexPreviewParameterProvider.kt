@@ -11,20 +11,19 @@ class PokedexPreviewParameterProvider : PreviewParameterProvider<PokedexViewStat
         val pokemons = listOf(
             Pokemon(
                 name = "Bulbasaur",
-                url = "https://pokeapi.co/api/v2/pokemon/1/"
-                //url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+                url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
             ),
             Pokemon(
                 name = "Ivysaur",
-                url = "https://pokeapi.co/api/v2/pokemon/2/"
+                url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png"
             ),
             Pokemon(
                 name = "Venusaur",
-                url = "https://pokeapi.co/api/v2/pokemon/3/"
+                url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png"
             ),
             Pokemon(
                 name = "Charmander",
-                url = "https://pokeapi.co/api/v2/pokemon/4/"
+                url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"
             )
         )
     }

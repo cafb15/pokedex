@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.pokedex.domain.model.Pokemon
 
 @Composable
@@ -21,6 +22,11 @@ fun PokedexItem(
         modifier = modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        AsyncImage(
+            model = pokemon.url,
+            contentDescription = pokemon.name
+        )
+
         Text(
             modifier = Modifier.padding(vertical = 10.dp),
             text = pokemon.name
@@ -36,7 +42,7 @@ private fun PokedexItemPreview() {
     PokedexItem(
         pokemon = Pokemon(
             name = "bulbasaur",
-            url = "https://pokeapi.co/api/v2/pokemon/1/"
+            url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
         )
     )
 }

@@ -52,6 +52,7 @@ android {
 
 composeCompiler {
     reportsDestination = layout.buildDirectory.dir("compose_reports")
+    metricsDestination = layout.buildDirectory.dir("compose_reports")
     stabilityConfigurationFile = rootProject.layout.projectDirectory.file("stability_config.conf")
 }
 
@@ -74,6 +75,8 @@ dependencies {
 
     implementation(libs.room)
     ksp(libs.room.compiler)
+
+    implementation(libs.coil)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

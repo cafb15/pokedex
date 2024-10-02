@@ -24,11 +24,17 @@ data class PokemonModel(
 ) {
     fun toEntity(): PokemonEntity = PokemonEntity(
         name = name,
-        url = url
+        url = imageUrl
     )
 
     fun toDomain(): Pokemon = Pokemon(
         name = name,
-        url = url
+        url = imageUrl
     )
+
+    private val imageUrl: String
+        get() {
+            val id = url.split("/").dropLast(1).last()
+            return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$id.png"
+        }
 }
