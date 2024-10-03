@@ -1,4 +1,4 @@
-package com.pokedex.ui.view.pokedex.content
+package com.pokedex.ui.view.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

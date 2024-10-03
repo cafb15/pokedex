@@ -1,5 +1,6 @@
 package com.pokedex.ui.view.pokedex.content
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -16,10 +17,13 @@ import com.pokedex.domain.model.Pokemon
 @Composable
 fun PokedexItem(
     modifier: Modifier = Modifier,
-    pokemon: Pokemon
+    pokemon: Pokemon,
+    onPokemonClick: () -> Unit
 ) {
     Column(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .clickable(onClick = onPokemonClick),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         AsyncImage(
@@ -43,6 +47,7 @@ private fun PokedexItemPreview() {
         pokemon = Pokemon(
             name = "bulbasaur",
             url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
-        )
+        ),
+        onPokemonClick = {}
     )
 }

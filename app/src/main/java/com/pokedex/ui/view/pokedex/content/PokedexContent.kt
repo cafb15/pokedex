@@ -3,13 +3,15 @@ package com.pokedex.ui.view.pokedex.content
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import com.pokedex.ui.view.components.PokedexLoading
 import com.pokedex.ui.viewmodel.pokedex.PokedexViewState
 
 @Composable
 fun PokedexContent(
     viewState: PokedexViewState,
     onValueChange: (String) -> Unit,
-    onNextPage: () -> Unit
+    onNextPage: () -> Unit,
+    onPokemonClick: (String) -> Unit
 ) {
     when (viewState) {
         PokedexViewState.Loading -> PokedexLoading()
@@ -18,7 +20,8 @@ fun PokedexContent(
             pokemons = viewState.pokemons,
             pokemonNameFilter = viewState.pokemonNameFilter,
             onValueChange = onValueChange,
-            onNextPage = onNextPage
+            onNextPage = onNextPage,
+            onPokemonClick = onPokemonClick
         )
     }
 }
@@ -31,6 +34,7 @@ private fun PokedexContentPreview(
     PokedexContent(
         viewState = viewState,
         onValueChange = {},
-        onNextPage = {}
+        onNextPage = {},
+        onPokemonClick = {}
     )
 }

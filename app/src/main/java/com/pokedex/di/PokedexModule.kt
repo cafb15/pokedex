@@ -8,6 +8,7 @@ import com.pokedex.data.repository.PokedexRepositoryImpl
 import com.pokedex.domain.repository.PokedexRepository
 import com.pokedex.domain.usecase.GetPokedexUseCase
 import com.pokedex.ui.viewmodel.pokedex.PokedexViewModel
+import com.pokedex.ui.viewmodel.pokemondetail.PokemonDetailViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
@@ -27,4 +28,6 @@ val pokedexModule = module {
     factory { GetPokedexUseCase(repository = get()) }
 
     viewModel { PokedexViewModel(getPokedexUseCase = get()) }
+
+    viewModel { PokemonDetailViewModel(pokedexRepository = get()) }
 }

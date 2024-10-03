@@ -3,6 +3,7 @@ package com.pokedex.data.repository
 import com.pokedex.data.datasource.local.PokedexLocalDataSource
 import com.pokedex.data.datasource.remote.PokedexRemoteDataSource
 import com.pokedex.domain.model.Pokedex
+import com.pokedex.domain.model.PokemonInfo
 import com.pokedex.domain.repository.PokedexRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -14,7 +15,10 @@ class PokedexRepositoryImpl(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : PokedexRepository {
 
-    override suspend fun getPokedex(limit: Int, offset: Int): Result<Pokedex> = withContext(ioDispatcher) {
+    override suspend fun getPokedex(
+        limit: Int,
+        offset: Int
+    ): Result<Pokedex> = withContext(ioDispatcher) {
         val result = remoteDataSource.getPokedex(limit = limit, offset = offset)
 
         result.fold(
@@ -34,5 +38,11 @@ class PokedexRepositoryImpl(
                 )
             }
         )
+    }
+
+    override suspend fun getPokemonInfo(
+        pokemonName: String
+    ): Result<PokemonInfo> = withContext(ioDispatcher) {
+        remoteDataSource.getPokemonInfo(pokemonName).map { it.toDomain() }
     }
 }

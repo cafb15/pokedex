@@ -13,6 +13,7 @@ import com.pokedex.ui.navigation.LocalNavController
 import com.pokedex.ui.navigation.PokedexRoute
 import com.pokedex.ui.navigation.pokedexDestination
 import com.pokedex.core.ui.theme.PokedexTheme
+import com.pokedex.ui.navigation.pokemonDetailDestination
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +31,7 @@ class MainActivity : ComponentActivity() {
                             startDestination = PokedexRoute
                         ) {
                             pokedexDestination()
+                            pokemonDetailDestination()
                         }
                     }
                 }

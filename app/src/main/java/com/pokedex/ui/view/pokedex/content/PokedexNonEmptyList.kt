@@ -30,7 +30,8 @@ fun PokedexNonEmptyList(
     pokemons: List<Pokemon>,
     pokemonNameFilter: String,
     onValueChange: (String) -> Unit,
-    onNextPage: () -> Unit
+    onNextPage: () -> Unit,
+    onPokemonClick: (String) -> Unit
 ) {
     val lazyState = rememberLazyListState()
     val shouldPaginate by remember {
@@ -62,7 +63,8 @@ fun PokedexNonEmptyList(
                         modifier = Modifier.applyIf(pokemons.last().name == pokemon.name) {
                             padding(bottom = 32.dp)
                         },
-                        pokemon = pokemon
+                        pokemon = pokemon,
+                        onPokemonClick = { onPokemonClick(pokemon.name) }
                     )
                 }
             }
@@ -91,6 +93,7 @@ private fun PokedexNonEmptyListPreview() {
         pokemons = PokedexPreviewParameterProvider.pokemons,
         pokemonNameFilter = "",
         onValueChange = {},
-        onNextPage = {}
+        onNextPage = {},
+        onPokemonClick = {}
     )
 }
