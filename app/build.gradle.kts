@@ -78,7 +78,12 @@ dependencies {
 
     implementation(libs.coil)
 
+    testImplementation(libs.mockk)
     testImplementation(libs.junit)
+    testImplementation(libs.mock.web.server)
+    testImplementation(libs.coroutines.test)
+    testImplementation(libs.kluent.android)
+
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))

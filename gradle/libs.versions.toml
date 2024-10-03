@@ -22,6 +22,12 @@ room = "2.6.1"
 
 coil = "2.7.0"
 
+mockk = "1.13.12"
+mockWebServer = "4.12.0"
+
+coroutine = "1.9.0"
+kluent = "1.73"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -55,6 +61,12 @@ room = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 
 coil = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+mock-web-server = { group = "com.squareup.okhttp3" , name = "mockwebserver", version.ref = "mockWebServer" }
+
+coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutine" }
+kluent-android = { module = "org.amshove.kluent:kluent-android", version.ref = "kluent" }
 
 [plugins]
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
